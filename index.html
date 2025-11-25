@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Macros de Suporte</title>
+  <title>Macros de Suporte • Versão Expandida</title>
+
   <style>
     :root {
       --bg: #f3f3f3;
@@ -14,7 +15,6 @@
       --button: #007bff;
       --button-hover: #0056b3;
     }
-
     body.dark {
       --bg: #1a1a1a;
       --card: #222222;
@@ -33,10 +33,8 @@
       padding: 20px;
       transition: 0.3s;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+    h1 { text-align: center; margin-bottom: 30px; }
+
     .categoria {
       background: var(--card);
       padding: 20px;
@@ -51,10 +49,8 @@
       border-radius: 8px;
       margin-bottom: 15px;
     }
-    .macro-texto {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
+    .macro-texto { font-size: 16px; margin-bottom: 10px; }
+
     button {
       background: var(--button);
       border: none;
@@ -62,10 +58,9 @@
       padding: 10px 15px;
       border-radius: 6px;
       cursor: pointer;
+      margin-right: 5px;
     }
-    button:hover {
-      background: var(--button-hover);
-    }
+    button:hover { background: var(--button-hover); }
 
     /* Painel Admin */
     #adminPanel {
@@ -76,9 +71,10 @@
       margin-top: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
+
     textarea {
       width: 100%;
-      height: 120px;
+      height: 90px;
       margin-bottom: 10px;
       border-radius: 8px;
       border: 1px solid var(--macro-border);
@@ -89,119 +85,88 @@
   </style>
 </head>
 <body>
-  <h1>📄 Macros de Suporte / Staff</h1>
+  <h1>📄 Macros de Suporte / Staff – Versão Expandida</h1>
 
   <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
   <button onclick="loginAdmin()">Painel Admin</button>
 
-  <!-- Categoria Suporte / Atendimento -->
+  <!-- CATEGORIA: SUPORTE / ATENDIMENTO -->
   <div class="categoria">
     <h2>Suporte / Atendimento</h2>
 
-    <div class="macro">
-      <div class="macro-texto" id="macro1">Opa, estou verificando sua situação agora. Só um momento!</div>
-      <button onclick="copy('macro1')">Copiar</button>
-    </div>
-
-    <div class="macro">
-      <div class="macro-texto" id="macro2">Seu ticket foi recebido! Em breve um atendente irá te responder.</div>
-      <button onclick="copy('macro2')">Copiar</button>
-    </div>
+    <div class="macro"><div class="macro-texto" id="macro1">Olá! Estou verificando sua solicitação, aguarde um instante.</div><button onclick="copy('macro1')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro2">Seu ticket foi recebido e já está na fila de atendimento.</div><button onclick="copy('macro2')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro3">Poderia me informar mais detalhes para que eu possa te ajudar melhor?</div><button onclick="copy('macro3')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro4">Retornando ao seu ticket! Obrigado pela paciência.</div><button onclick="copy('macro4')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro5">Encaminhei sua situação para o setor responsável.</div><button onclick="copy('macro5')">Copiar</button></div>
   </div>
 
-  <div class="macro">
-      <div class="macro-texto" id="macro2">Seu ticket foi recebido! Em breve um atendente irá te responder.</div>
-      <button onclick="copy('macro2')">Copiar</button>
-    </div>
-  </div>
-
-  <div class="macro">
-      <div class="macro-texto" id="macro2">Seu ticket foi recebido! Em breve um atendente irá te responder.</div>
-      <button onclick="copy('macro2')">Copiar</button>
-    </div>
-  </div>
-  
-  <!-- Categoria Staff / Administração -->
+  <!-- CATEGORIA: STAFF / ADMINISTRAÇÃO -->
   <div class="categoria">
     <h2>Staff / Administração</h2>
 
-    <div class="macro">
-      <div class="macro-texto" id="macro3">Sua denúncia foi registrada e será analisada pela administração.</div>
-      <button onclick="copy('macro3')">Copiar</button>
-    </div>
-
-    <div class="macro">
-      <div class="macro-texto" id="macro4">Lembre-se de seguir todas as regras do servidor. Qualquer dúvida estamos por aqui!</div>
-      <button onclick="copy('macro4')">Copiar</button>
-    </div>
+    <div class="macro"><div class="macro-texto" id="macro6">Sua denúncia foi registrada e será analisada pela administração.</div><button onclick="copy('macro6')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro7">Lembre-se de seguir todas as regras do servidor. Estamos à disposição!</div><button onclick="copy('macro7')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro8">Estamos avaliando seu caso. Em breve retornaremos com uma resposta.</div><button onclick="copy('macro8')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro9">A administração está revisando sua solicitação internamente.</div><button onclick="copy('macro9')">Copiar</button></div>
+    <div class="macro"><div class="macro-texto" id="macro10">Caso tenha provas adicionais, por favor envie aqui no ticket.</div><button onclick="copy('macro10')">Copiar</button></div>
   </div>
 
-  <div class="macro">
-      <div class="macro-texto" id="macro4">Lembre-se de seguir todas as regras do servidor. Qualquer dúvida estamos por aqui!</div>
-      <button onclick="copy('macro4')">Copiar</button>
-    </div>
-  </div>
-
-  <div class="macro">
-      <div class="macro-texto" id="macro4">Lembre-se de seguir todas as regras do servidor. Qualquer dúvida estamos por aqui!</div>
-      <button onclick="copy('macro4')">Copiar</button>
-    </div>
-  </div>
-  <!-- Painel Admin -->
+  <!-- PAINEL ADMIN -->
   <div id="adminPanel">
-    <h2>Painel Admin</h2>
-    <p>Edite qualquer macro abaixo e clique em salvar.</p>
+    <h2>Painel Admin – Editar Macros</h2>
+    <p>Edite qualquer macro e clique em salvar.</p>
 
-    <label>Macro 1:</label>
-    <textarea id="edit1"></textarea>
-
-    <label>Macro 2:</label>
-    <textarea id="edit2"></textarea>
-
-    <label>Macro 3:</label>
-    <textarea id="edit3"></textarea>
-
-    <label>Macro 4:</label>
-    <textarea id="edit4"></textarea>
-
+    <div id="adminEditor"></div>
     <button onclick="salvarEdicoes()">Salvar Alterações</button>
   </div>
 
-  <script>
-    function copy(id) {
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text);
-      alert("Macro copiada!");
-    }
+<script>
+// Função copiar
+function copy(id) {
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert("Macro copiada!");
+}
 
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
+// Modo escuro
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+}
 
-    function loginAdmin() {
-      const senha = prompt("Digite a senha do painel:");
-      if (senha === "admin123") {
-        document.getElementById("adminPanel").style.display = "block";
-        carregarMacros();
-      } else {
-        alert("Senha incorreta!");
-      }
-    }
+// Painel Admin
+function loginAdmin() {
+  const senha = prompt("Digite a senha do painel:");
+  if (senha === "admin123") {
+    document.getElementById("adminPanel").style.display = "block";
+    carregarEditor();
+  } else {
+    alert("Senha incorreta!");
+  }
+}
 
-    function carregarMacros() {
-      edit1.value = macro1.innerText;
-      edit2.value = macro2.innerText;
-      edit3.value = macro3.innerText;
-      edit4.value = macro4.innerText;
-    }
+// Carregar todos os campos do painel automaticamente
+function carregarEditor() {
+  const editor = document.getElementById("adminEditor");
+  editor.innerHTML = "";
 
-    function salvarEdicoes() {
-      macro1.innerText = edit1.value;
-      macro2.innerText = edit2.value;
-      macro3.innerText = edit3.value;
-      macro4.innerText = edit4.value;
-      alert("Macros atualizadas!");
-    }
-  </script>
+  for (let i = 1; i <= 10; i++) {
+    const macroText = document.getElementById(`macro${i}`).innerText;
+    editor.innerHTML += `
+      <label>Macro ${i}:</label>
+      <textarea id="edit${i}">${macroText}</textarea>
+    `;
+  }
+}
+
+// Salvar as edições
+function salvarEdicoes() {
+  for (let i = 1; i <= 10; i++) {
+    const novoTexto = document.getElementById(`edit${i}`).value;
+    document.getElementById(`macro${i}`).innerText = novoTexto;
+  }
+  alert("Todas as macros foram atualizadas!");
+}
+</script>
+
 </body>
 </html>
