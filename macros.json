@@ -1,0 +1,18 @@
+{
+  "categorias": [
+    {
+      "nome": "Suporte / Atendimento",
+      "macros": [
+        "Opa, estou verificando sua situação agora. Só um momento!",
+        "Seu ticket foi recebido! Em breve um atendente irá te responder."
+      ]
+    },
+    {
+      "nome": "Staff / Administração",
+      "macros": [
+        "Sua denúncia foi registrada e será analisada pela administração.",
+        "Lembre-se de seguir todas as regras do servidor!"
+      ]
+    }
+  ]
+}
