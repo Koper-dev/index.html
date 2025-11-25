@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Macros de Suporte</title>
+  <style>
+    :root {
+      --bg: #f3f3f3;
+      --card: #ffffff;
+      --text: #000000;
+      --macro-bg: #fafafa;
+      --macro-border: #ddd;
+      --button: #007bff;
+      --button-hover: #0056b3;
+    }
+
+    body.dark {
+      --bg: #1a1a1a;
+      --card: #222222;
+      --text: #f1f1f1;
+      --macro-bg: #2a2a2a;
+      --macro-border: #444;
+      --button: #3d8bff;
+      --button-hover: #1c5cd1;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      transition: 0.3s;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .categoria {
+      background: var(--card);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .macro {
+      background: var(--macro-bg);
+      padding: 15px;
+      border: 1px solid var(--macro-border);
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    .macro-texto {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: var(--button);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: var(--button-hover);
+    }
+
+    /* Painel Admin */
+    #adminPanel {
+      display: none;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--macro-border);
+      background: var(--macro-bg);
+      color: var(--text);
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📄 Macros de Suporte / Staff</h1>
+
+  <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
+  <button onclick="loginAdmin()">Painel Admin</button>
+
+  <!-- Categoria Suporte / Atendimento -->
+  <div class="categoria">
+    <h2>Suporte / Atendimento</h2>
+
+    <div class="macro">
+      <div class="macro-texto" id="macro1">Opa, estou verificando sua situação agora. Só um momento!</div>
+      <button onclick="copy('macro1')">Copiar</button>
+    </div>
+
+    <div class="macro">
+      <div class="macro-texto" id="macro2">Seu ticket foi recebido! Em breve um atendente irá te responder.</div>
+      <button onclick="copy('macro2')">Copiar</button>
+    </div>
+  </div>
+
+  <!-- Categoria Staff / Administração -->
+  <div class="categoria">
+    <h2>Staff / Administração</h2>
+
+    <div class="macro">
+      <div class="macro-texto" id="macro3">Sua denúncia foi registrada e será analisada pela administração.</div>
+      <button onclick="copy('macro3')">Copiar</button>
+    </div>
+
+    <div class="macro">
+      <div class="macro-texto" id="macro4">Lembre-se de seguir todas as regras do servidor. Qualquer dúvida estamos por aqui!</div>
+      <button onclick="copy('macro4')">Copiar</button>
+    </div>
+  </div>
+
+  <!-- Painel Admin -->
+  <div id="adminPanel">
+    <h2>Painel Admin</h2>
+    <p>Edite qualquer macro abaixo e clique em salvar.</p>
+
+    <label>Macro 1:</label>
+    <textarea id="edit1"></textarea>
+
+    <label>Macro 2:</label>
+    <textarea id="edit2"></textarea>
+
+    <label>Macro 3:</label>
+    <textarea id="edit3"></textarea>
+
+    <label>Macro 4:</label>
+    <textarea id="edit4"></textarea>
+
+    <button onclick="salvarEdicoes()">Salvar Alterações</button>
+  </div>
+
+  <script>
+    function copy(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
+      alert("Macro copiada!");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function loginAdmin() {
+      const senha = prompt("Digite a senha do painel:");
+      if (senha === "admin123") {
+        document.getElementById("adminPanel").style.display = "block";
+        carregarMacros();
+      } else {
+        alert("Senha incorreta!");
+      }
+    }
+
+    function carregarMacros() {
+      edit1.value = macro1.innerText;
+      edit2.value = macro2.innerText;
+      edit3.value = macro3.innerText;
+      edit4.value = macro4.innerText;
+    }
+
+    function salvarEdicoes() {
+      macro1.innerText = edit1.value;
+      macro2.innerText = edit2.value;
+      macro3.innerText = edit3.value;
+      macro4.innerText = edit4.value;
+      alert("Macros atualizadas!");
+    }
+  </script>
+</body>
+</html>
