@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Macros de Suporte • Versão Expandida</title>
-
+  <title>Macros de Suporte - Admin GitHub</title>
   <style>
     :root {
       --bg: #f3f3f3;
@@ -24,7 +23,6 @@
       --button: #3d8bff;
       --button-hover: #1c5cd1;
     }
-
     body {
       font-family: Arial, sans-serif;
       background: var(--bg);
@@ -33,8 +31,6 @@
       padding: 20px;
       transition: 0.3s;
     }
-    h1 { text-align: center; margin-bottom: 30px; }
-
     .categoria {
       background: var(--card);
       padding: 20px;
@@ -49,124 +45,90 @@
       border-radius: 8px;
       margin-bottom: 15px;
     }
-    .macro-texto { font-size: 16px; margin-bottom: 10px; }
-
-    button {
-      background: var(--button);
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-right: 5px;
-    }
+    button { background: var(--button); border: none; color: white; padding: 10px 15px; border-radius: 6px; cursor: pointer; }
     button:hover { background: var(--button-hover); }
-
-    /* Painel Admin */
-    #adminPanel {
-      display: none;
-      background: var(--card);
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-    }
-
-    textarea {
-      width: 100%;
-      height: 90px;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      border: 1px solid var(--macro-border);
-      background: var(--macro-bg);
-      color: var(--text);
-      padding: 10px;
-    }
+    #adminPanel { display:none; background:var(--card); padding:20px; border-radius:10px; margin-top:20px; }
+    textarea { width:100%; height:120px; margin-bottom:10px; border-radius:8px; border:1px solid var(--macro-border); background:var(--macro-bg); color:var(--text); padding:10px; }
   </style>
 </head>
 <body>
-  <h1>📄 Macros de Suporte / Staff – Versão Expandida</h1>
-
+  <h1>📄 Macros de Suporte / Staff</h1>
   <button onclick="toggleDarkMode()">Alternar Modo Escuro</button>
   <button onclick="loginAdmin()">Painel Admin</button>
 
-  <!-- CATEGORIA: SUPORTE / ATENDIMENTO -->
-  <div class="categoria">
-    <h2>Suporte / Atendimento</h2>
+  <div id="conteudo"></div>
 
-    <div class="macro"><div class="macro-texto" id="macro1">Olá! Estou verificando sua solicitação, aguarde um instante.</div><button onclick="copy('macro1')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro2">Seu ticket foi recebido e já está na fila de atendimento.</div><button onclick="copy('macro2')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro3">Poderia me informar mais detalhes para que eu possa te ajudar melhor?</div><button onclick="copy('macro3')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro4">Retornando ao seu ticket! Obrigado pela paciência.</div><button onclick="copy('macro4')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro5">Encaminhei sua situação para o setor responsável.</div><button onclick="copy('macro5')">Copiar</button></div>
-  </div>
-
-  <!-- CATEGORIA: STAFF / ADMINISTRAÇÃO -->
-  <div class="categoria">
-    <h2>Staff / Administração</h2>
-
-    <div class="macro"><div class="macro-texto" id="macro6">Sua denúncia foi registrada e será analisada pela administração.</div><button onclick="copy('macro6')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro7">Lembre-se de seguir todas as regras do servidor. Estamos à disposição!</div><button onclick="copy('macro7')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro8">Estamos avaliando seu caso. Em breve retornaremos com uma resposta.</div><button onclick="copy('macro8')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro9">A administração está revisando sua solicitação internamente.</div><button onclick="copy('macro9')">Copiar</button></div>
-    <div class="macro"><div class="macro-texto" id="macro10">Caso tenha provas adicionais, por favor envie aqui no ticket.</div><button onclick="copy('macro10')">Copiar</button></div>
-  </div>
-
-  <!-- PAINEL ADMIN -->
   <div id="adminPanel">
-    <h2>Painel Admin – Editar Macros</h2>
-    <p>Edite qualquer macro e clique em salvar.</p>
-
-    <div id="adminEditor"></div>
-    <button onclick="salvarEdicoes()">Salvar Alterações</button>
+    <h2>Painel Admin</h2>
+    <p>Edite abaixo e salve no GitHub automaticamente.</p>
+    <textarea id="editor"></textarea>
+    <button onclick="salvarGitHub()">Salvar no GitHub</button>
   </div>
 
 <script>
-// Função copiar
-function copy(id) {
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert("Macro copiada!");
+const repoUser = "SEU_USUARIO";
+const repoName = "SEU_REPOSITORIO";
+const filePath = "macros.json";
+let githubToken = "";
+let fileSha = "";
+
+async function carregarMacros() {
+  const res = await fetch(`https://raw.githubusercontent.com/${repoUser}/${repoName}/main/${filePath}`);
+  const data = await res.json();
+
+  let html = "";
+  for (const categoria of data.categorias) {
+    html += `<div class='categoria'><h2>${categoria.nome}</h2>`;
+    categoria.macros.forEach((m, i) => {
+      html += `<div class='macro'><div class='macro-texto'>${m}</div><button onclick=\"copiar('${m}')\">Copiar</button></div>`;
+    });
+    html += `</div>`;
+  }
+
+  document.getElementById("conteudo").innerHTML = html;
 }
 
-// Modo escuro
-function toggleDarkMode() {
-  document.body.classList.toggle('dark');
-}
+function copiar(txt) { navigator.clipboard.writeText(txt); alert("Copiado!"); }
+function toggleDarkMode() { document.body.classList.toggle("dark"); }
 
-// Painel Admin
 function loginAdmin() {
-  const senha = prompt("Digite a senha do painel:");
-  if (senha === "admin123") {
-    document.getElementById("adminPanel").style.display = "block";
-    carregarEditor();
-  } else {
-    alert("Senha incorreta!");
-  }
+  githubToken = prompt("Token do GitHub (com permissão de commit):");
+  if (!githubToken) return alert("Token inválido.");
+
+  fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/${filePath}`)
+    .then(r => r.json())
+    .then(d => {
+      fileSha = d.sha;
+      return fetch(d.download_url);
+    })
+    .then(r => r.text())
+    .then(txt => {
+      editor.value = txt;
+      adminPanel.style.display = "block";
+    });
 }
 
-// Carregar todos os campos do painel automaticamente
-function carregarEditor() {
-  const editor = document.getElementById("adminEditor");
-  editor.innerHTML = "";
+async function salvarGitHub() {
+  const conteudoBase64 = btoa(unescape(encodeURIComponent(editor.value)));
 
-  for (let i = 1; i <= 10; i++) {
-    const macroText = document.getElementById(`macro${i}`).innerText;
-    editor.innerHTML += `
-      <label>Macro ${i}:</label>
-      <textarea id="edit${i}">${macroText}</textarea>
-    `;
-  }
+  await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/${filePath}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${githubToken}`
+    },
+    body: JSON.stringify({
+      message: "Atualização automática pelo painel admin",
+      content: conteudoBase64,
+      sha: fileSha
+    })
+  });
+
+  alert("Salvo!");
+  location.reload();
 }
 
-// Salvar as edições
-function salvarEdicoes() {
-  for (let i = 1; i <= 10; i++) {
-    const novoTexto = document.getElementById(`edit${i}`).value;
-    document.getElementById(`macro${i}`).innerText = novoTexto;
-  }
-  alert("Todas as macros foram atualizadas!");
-}
+carregarMacros();
 </script>
-
 </body>
 </html>
